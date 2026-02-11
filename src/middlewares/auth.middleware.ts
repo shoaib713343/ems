@@ -6,15 +6,7 @@ import { db } from "../config/db";
 import { eq } from "drizzle-orm";
 import { asyncHandler } from "../utils/asyncHandler";
 
-type UserType = typeof users.$inferSelect;
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: Omit<UserType, 'hashPassword'>;
-        }
-    }
-}
 
 async function protectLogic(req: Request, res: Response, next: NextFunction){
     const authHeader = req.headers.authorization;
